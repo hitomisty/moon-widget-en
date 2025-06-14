@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moon Phase Widget</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Serif', serif;
+      background-color: #f5f3eb;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.3) 1px, transparent 1px);
+      background-size: 20px 20px;
+      color: #333;
+      text-align: center;
+      padding: 2em;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      max-width: 320px;
+      margin: 3em auto;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .moon-icon {
+      font-size: 3em;
+      margin-bottom: 0.3em;
+    }
+    .moon-label {
+      font-size: 1.4em;
+      white-space: pre-line;
+    }
+  </style>
+</head>
+<body>
+  <div class="moon-icon" id="moonIcon">🌙</div>
+  <div class="moon-label" id="moonLabel">Today is\nFull Moon\nphase.</div>
+
+  <script>
+    function getMoonAge() {
+      const today = new Date();
+      const knownNewMoon = new Date('2000-01-06T18:14:00');
+      const synodicMonth = 29.530588;
+      const days = (today - knownNewMoon) / (1000 * 60 * 60 * 24);
+      return (days % synodicMonth);
+    }
+
+    function getMoonData(age) {
+      if (age < 1.5 || age >= 28.5) return ['🌑', 'New Moon'];
+      if (age < 3.5) return ['🌒', 'Waxing Crescent'];
+      if (age < 7.5) return ['🌒', 'Waxing Crescent'];
+      if (age < 8.5) return ['🌓', 'First Quarter'];
+      if (age < 14.0) return ['🌔', 'Waxing Gibbous'];
+      if (age < 15.5) return ['🌕', 'Full Moon'];
+      if (age < 21.5) return ['🌖', 'Waning Gibbous'];
+      if (age < 23.5) return ['🌗', 'Last Quarter'];
+      if (age < 28.5) return ['🌘', 'Waning Crescent'];
+      return ['🌑', 'New Moon'];
+    }
+
+    const age = getMoonAge();
+    const [icon, label] = getMoonData(age);
+    document.getElementById('moonIcon').textContent = icon;
+    document.getElementById('moonLabel').textContent = `Today is\n${label}\nphase.`;
+  </script>
+</body>
+</html>
