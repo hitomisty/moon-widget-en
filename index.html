@@ -15,7 +15,7 @@
       padding: 2em;
       border: 1px solid #ddd;
       border-radius: 12px;
-      max-width: 280px;
+      max-width: 320px; /* 少し幅を広げる */
       margin: 0 auto;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
@@ -28,15 +28,30 @@
       color: #666;
     }
     .moon-label {
-      font-size: 1.5em;
+      font-size: 1.4em; /* 少し小さくする */
       font-weight: bold;
       margin-bottom: 0.5em;
+      white-space: nowrap; /* 改行を防ぐ */
+      overflow: hidden;
+      text-overflow: ellipsis; /* 長すぎる場合は省略記号 */
     }
     .moon-advice {
       font-size: 0.9em;
       color: #555;
       line-height: 1.5;
       margin-top: 1em;
+      /* 適度な改行を許可 - 長すぎる文のみ改行 */
+    }
+    
+    /* レスポンシブ対応 */
+    @media (max-width: 360px) {
+      .widget-wrapper {
+        max-width: 90vw;
+        padding: 1.5em;
+      }
+      .moon-label {
+        font-size: 1.2em;
+      }
     }
   </style>
 </head>
